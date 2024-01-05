@@ -1,39 +1,27 @@
 import pandas as pd
 import requests
+import os
 
-'''
-Updates: 
-- 2021-02-04: Created the TestSample.csv file in the new data folder and added the path to it here . This way you don't have to create it yourself
+URL = 'https://lr6545b2p6.execute-api.us-east-1.amazonaws.com/prod/invoice'
 
-Notes:
-- If you run into a json-body not found error, than you forgot to configure the application/json mapping template in the method
-- Some students had the problem: They get 200 here but the ClodWatch log of the Lambda says KeyError: 'context'  -- I can only force this when I dont't send in a payload to the API. Make sure you send data
-- If you get 403 error: Make sure to add the resource name you created in API gateway to the URL . In my case "hello". If you just copy out your URL from the "stage" in the UI then this is missing. 
-'''
+# read the testfile
+customer_data = pd.read_csv(r'C:\Users\ayomi\OneDrive\Documents\GitHub\AWS-data-pipeline\client\test.csv')
 
-# URL of your endpoint
-URL = "https://xxxxxx.execute-api.us-east-1.amazonaws.com/prod/hello"
+def send_json_data(customer_data):
+    for i in customer_data.index:
+        try:
+            # convert the row to json
+            export = customer_data.loc[i].to_json()
 
+            # send it to the api
+            response = requests.post(URL, data=export)
 
-#read the testfile
-data = pd.read_csv('data/TestSample.csv', sep = ',')
+            # print the return code and response content
+            print(f"The response below has been sent to the API_URL (Status Code: {response.status_code})")
+            print(export)
+            print(response.text)
+        except Exception as e:
+            print(f"Error sending data for row {i}: {str(e)}")
 
-# write a single row from the testfile into the api
-#export = data.loc[2].to_json()
-#response = requests.post(URL, data = export)
-#print(response)
-
-# write all the rows from the testfile to the api as put request
-for i in data.index:
-    try:
-        # convert the row to json
-        export = data.loc[i].to_json()
-
-        #send it to the api
-        response = requests.post(URL, data = export)
-
-        # print the returncode
-        print(export)
-        print(response)
-    except:
-        print(data.loc[i])
+if __name__ == '__main__':
+    send_json_data(customer_data)
