@@ -9,13 +9,13 @@ s3_client = boto3.client('s3')
 
 dateTimeObj = datetime.now()
 
-#format the string
+# format the string
 timestampStr = dateTimeObj.strftime("%d-%b-%Y-%H%M%S")
 
 kinesisRecords = []
 
 def lambda_handler(event, context):
-    #print("Received event: " + json.dumps(event, indent=2))
+    # print("Received event: " + json.dumps(event, indent=2))
     for record in event['Records']:
 
         payload = base64.b64decode(record['kinesis']['data'])

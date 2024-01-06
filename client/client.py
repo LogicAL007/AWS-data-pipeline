@@ -1,11 +1,16 @@
 import pandas as pd
 import requests
 import os
+from dotenv import load_dotenv
 
-URL = 'https://lr6545b2p6.execute-api.us-east-1.amazonaws.com/prod/invoice'
+load_dotenv()
+
+
+URL = os.getenv("API_URL")
+FILE_PATH = os.getenv('CSV_PATH')
 
 # read the testfile
-customer_data = pd.read_csv(r'C:\Users\ayomi\OneDrive\Documents\GitHub\AWS-data-pipeline\client\test.csv')
+customer_data = pd.read_csv(FILE_PATH)
 
 def send_json_data(customer_data):
     for i in customer_data.index:

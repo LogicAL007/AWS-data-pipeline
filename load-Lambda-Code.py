@@ -42,8 +42,8 @@ def lambda_handler(event, context):
 
         #remove Invoice and Stock code from dynmodb record
         stock_dict = dict(dict_record)
-        stock_dict.pop('InvoiceNo',None)
-        stock_dict.pop('StockCode',None)
+        stock_dict.pop('InvoiceNo', None)
+        stock_dict.pop('StockCode', None)
 
         #turn the dict into a json
         stock_json = json.dumps(stock_dict)

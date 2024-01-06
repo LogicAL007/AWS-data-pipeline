@@ -10,7 +10,6 @@ def lambda_handler(event, context):
     method = mycontext.get("http-method")
 
     if method == "GET":
-        # TODO: write code...
         dynamo_client = boto3.client('dynamodb')
 
         im_customerID = event['params']['querystring']['CustomerID']
