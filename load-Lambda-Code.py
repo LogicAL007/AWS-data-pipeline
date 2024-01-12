@@ -40,7 +40,7 @@ def lambda_handler(event, context):
         #create export dictionary
         ex_dynamoRecord = dict()
 
-        #remove Invoice and Stock code from dynmodb record
+        #remove Invoice and Stock code from dynamodb record
         stock_dict = dict(dict_record)
         stock_dict.pop('InvoiceNo', None)
         stock_dict.pop('StockCode', None)

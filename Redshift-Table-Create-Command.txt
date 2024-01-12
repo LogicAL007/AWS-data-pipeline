@@ -1,6 +1,5 @@
 
 #create Table for import set to not null .
-#This way row inserts run in error if they are not correctly imported
 
 create table firehosetransactions(
 	InvoiceNo int not null,
