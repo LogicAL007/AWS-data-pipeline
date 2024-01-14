@@ -3,7 +3,7 @@
 This project outlines the data ingestion pipeline used to process customer and invoice data and i used various AWS services for the seamless ingestion. The pipeline integrates with services such as Amazon API Gateway, AWS Lambda, Amazon Kinesis, and Amazon DynamoDB to ingest, process, and store data effectively.
 
 ## Architecture
-![Data Ingestion Pipeline Diagram]()
+<img width="601" alt="Screenshot 2024-01-14 214117" src="https://github.com/LogicAL007/AWS-data-pipeline/assets/122959675/29150d37-7e9f-40d4-9529-ddb1f05d2998">
 
 The pipeline consists of the following steps:
 1. **Input Client**: Sends JSON data to an API Gateway.
